@@ -23,6 +23,6 @@
     "koa-router": "^7.4.0",
     "koa-static-cache": "^5.1.2",
     "moment": "^2.22.2",
-    "mysql": "mysqljs/mysql"
+    "mysql": "^2.15.0"
   }
 }
