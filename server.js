@@ -6,25 +6,70 @@ let moment = require('moment');
 let mysql = require('mysql');
 let app = new Koa();
 let router = new Router();
-let connection = mysql.createConnection({
+let pool = mysql.createPool({
 	host: '127.0.0.1',
 	user: 'root',
 	password: '1qaz2wsxpl,okm',
 	database: 'simple_mysql'
 });
-connection.connect(function(err) {
-	if (err) {
-		console.error('error connecting: ' + err.stack);
+router.post('/message/add', async ctx => {
+	let { name, email, message } = ctx.request.body;
+	let create_time = moment().format('YYYY-MM-DD HH:mm');
+	if(!name){
+		ctx.body = {
+			err_code: 1,
+			message: '缺少必要参数name'
+		};
+		return;
+	}else if(!email){
+		ctx.body = {
+			err_code: 2,
+			message: '缺少必要参数email'
+		};
+		return;
+	}else if(!message){
+		ctx.body = {
+			err_code: 3,
+			message: '缺少必要参数message'
+		};
 		return;
 	}
-	console.log('connected as id ' + connection.threadId);
-});
-
-router.post('/message/add', async ctx => {
-
+	let returnResults = () => {
+		return new Promise((resolve) => {
+			pool.getConnection((err, connection) => {
+				if(err) throw err;
+				connection.query(`INSERT INTO message_list VALUES (${name}, ${email}, ${message}, ${create_time})`, (error, results, field) => {
+					connection.release();
+					if(error) throw error;
+					resolve({
+						err_code: 0,
+						message: '新增成功',
+						id: results.insertId
+					});
+				})
+			})
+		})
+	};
+	ctx.body = await returnResults();
 });
 router.get('/message/list', async ctx => {
-
+	let returnResults = () => {
+		return new Promise((resolve) => {
+			pool.getConnection((err, connection) => {
+				if(err) throw err;
+				connection.query(`SELECT * FROM message_list`, (error, results) => {
+					connection.release();
+					if(error) throw error;
+					resolve({
+						error_code: 0,
+						message: '获取成功',
+						data: results
+					});
+				});
+			});
+		})
+	};
+	ctx.body = await returnResults();
 });
 app.use(bodyParser());
 let files = {};

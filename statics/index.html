@@ -138,7 +138,7 @@
 					<section id="contact">
 						<div class="inner">
 							<section>
-								<form method="post" action="#">
+								<form>
 									<div class="field half first">
 										<label for="name">Name</label>
 										<input type="text" name="name" id="name" />
@@ -152,10 +152,35 @@
 										<textarea name="message" id="message" rows="6"></textarea>
 									</div>
 									<ul class="actions">
-										<li><input type="submit" value="Send Message" class="special" /></li>
+										<li><input type="submit" value="Send Message" class="special" onclick="postMessage(event)" /></li>
 										<li><input type="reset" value="Clear" /></li>
 									</ul>
 								</form>
+								<script>
+									function postMessage(e) {
+										e.preventDefault();
+										var name = document.getElementById('name').value;
+										var email = document.getElementById('email').value;
+										var message = document.getElementById('message').value;
+										if(!name){
+											alert('请输入Name');
+											return;
+										}else if(!email){
+											alert('请输入email');
+											return;
+										}else if(!message){
+											alert('请输入message');
+										}
+										var xml = new XMLHttpRequest();
+										xml.open('POST', '/message/add');
+										xml.onreadystatechange = function(){
+											if(xml.status === 200 && xml.readyState === 4){
+												alert('发送成功');
+											}
+										};
+										xml.send('name=' + name + '&email=' + email + '&message=' + message);
+									}
+								</script>
 							</section>
 							<section class="split">
 								<section>
