@@ -7,7 +7,7 @@ let mysql = require('mysql');
 let app = new Koa();
 let router = new Router();
 let connection = mysql.createConnection({
-	host: 'localhost',
+	host: '127.0.0.1',
 	user: 'root',
 	password: 'LiFuzhao1995',
 	database: 'simple_mysql'
