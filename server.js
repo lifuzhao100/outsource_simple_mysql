@@ -73,6 +73,9 @@ router.get('/message/list', async ctx => {
 });
 app.use(bodyParser());
 let files = {};
+app.use(ctx => {
+	ctx.body = 'hello world';
+});
 app.use(staticCache(require('path').join(__dirname, 'statics'), {
 	maxAge: 365 * 24 * 60 * 60,
 	gzip: true
