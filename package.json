@@ -1,0 +1,28 @@
+{
+  "name": "outsource_simple_mysql",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/lifuzhao100/outsource_simple_mysql.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/lifuzhao100/outsource_simple_mysql/issues"
+  },
+  "homepage": "https://github.com/lifuzhao100/outsource_simple_mysql#readme",
+  "dependencies": {
+    "koa": "^2.5.1",
+    "koa-bodyparser": "^4.2.1",
+    "koa-router": "^7.4.0",
+    "koa-static-cache": "^5.1.2",
+    "moment": "^2.22.2",
+    "mysql": "mysqljs/mysql"
+  }
+}
