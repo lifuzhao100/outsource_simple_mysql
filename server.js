@@ -9,7 +9,7 @@ let router = new Router();
 let connection = mysql.createConnection({
 	host: '127.0.0.1',
 	user: 'root',
-	password: 'LiFuzhao1995',
+	password: '1qaz2wsxpl,okm',
 	database: 'simple_mysql'
 });
 connection.connect(function(err) {
