@@ -178,7 +178,12 @@
 												alert('发送成功');
 											}
 										};
-										xml.send('name=' + name + '&email=' + email + '&message=' + message);
+										xml.setRequestHeader('Content-Type', 'application/json');
+										xml.send({
+										  name: name,
+										  email:email,
+										  message: message
+										});
 									}
 								</script>
 							</section>
