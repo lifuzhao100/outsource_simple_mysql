@@ -12,7 +12,9 @@ let ftpServer = new FtpSrv('ftp://0.0.0.0:6667', {
 	file_format: 'ls'
 });
 ftpServer.on('login', ({username, password}, resolve, reject) => {
+	console.log('user:', username, '&pass:', password);
 	if(username === 'simple' && password === 'simple_job'){
+		console.log('resolve it');
 		resolve({
 			root: 'statics'
 		})
