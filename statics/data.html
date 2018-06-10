@@ -28,7 +28,7 @@
         	    if(xml.status === 200 && xml.readyState === 4){
                     var data = JSON.parse(xml.responseText).data;
                     var dataBody = document.getElementById('data-body');
-                    var trs = data.map(function(d){
+                    data.forEach(function(d){
                     	var tr = document.createElement('tr');
                     	var id = document.createElement('td');
                     	id.innerHTML = d.id;
@@ -45,8 +45,8 @@
                     	tr.appendChild(email);
                     	tr.appendChild(message);
                     	tr.appendChild(create_time);
+                    	dataBody.appendChild(tr);
                     });
-                    dataBody.innerHTML = trs.join('');
                 }
             };
             xml.send();
