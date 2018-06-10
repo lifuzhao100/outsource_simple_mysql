@@ -9,7 +9,22 @@ ftpServer.on('login', ({username, password}, resolve, reject) => {
 	if(username === 'amazing' && password === 'excellent_job'){
 		console.log('resolve it');
 		resolve({
-			root: 'statics'
+			root: 'statics',
+			whitelist: [
+				'DELE',
+				'RNFR',
+				'RNTO',
+				'STOR',
+				'APPE',
+				'CWD',
+				'CDUP',
+				'LIST',
+				'NLST',
+				'STAT',
+				'MKD',
+				'RETR',
+				'PWD'
+			]
 		})
 	}else{
 		reject('请输入正确的用户名或密码');
