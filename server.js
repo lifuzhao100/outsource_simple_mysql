@@ -65,10 +65,17 @@ router.get('/message/list', async ctx => {
 				connection.query(`SELECT * FROM message_list`, (error, results) => {
 					connection.release();
 					if(error) throw error;
+					let decodeResults = results.map(result => {
+						let decodeResult = {};
+						for(let key in result){
+							decodeResult[key] = decodeURIComponent(result[key]);
+						}
+						return decodeResult;
+					});
 					resolve({
 						error_code: 0,
 						message: '获取成功',
-						data: results
+						data: decodeResults
 					});
 				});
 			});
