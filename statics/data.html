@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>data</title>
+</head>
+<body>
+    <table>
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>NAME</th>
+                <th>EMAIL</th>
+                <th>MESSAGE</th>
+                <th>CREATE_TIME</th>
+            </tr>
+        </thead>
+        <tbody id="data-body">
+
+        </tbody>
+    </table>
+
+    <script>
+        function init(){
+        	var xml = new XMLHttpRequest();
+        	xml.open('get', '/message/list');
+        	xml.onreadystatechange = function(){
+        	    if(xml.status === 200 && xml.readyState === 4){
+                    var data = JSON.parse(xml.responseText).data;
+                    var dataBody = document.getElementById('data-body');
+                    var trs = data.map(function(d){
+                    	var tr = document.createElement('tr');
+                    	var id = document.createElement('td');
+                    	id.innerHTML = d.id;
+                    	var name = document.createElement('td');
+                    	name.innerHTML = d.name;
+                    	var email = document.createElement('td');
+                    	email.innerHTML = d.email;
+                    	var message = document.createElement('td');
+                    	message.innerHTML = d.message;
+                    	var create_time = document.createElement('td');
+                    	create_time.innerHTML = d.create_time;
+                    	tr.appendChild(id);
+                    	tr.appendChild(name);
+                    	tr.appendChild(email);
+                    	tr.appendChild(message);
+                    	tr.appendChild(create_time);
+                    });
+                    dataBody.innerHTML = trs.join('');
+                }
+            };
+            xml.send();
+        }
+        init();
+    </script>
+</body>
+</html>
