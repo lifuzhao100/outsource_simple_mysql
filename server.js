@@ -88,4 +88,4 @@ for (let file in files){
 app
 	.use(router.routes())
 	.use(router.allowedMethods());
-app.listen(6666);
+app.listen(6666, 'yh.rythb.com');
