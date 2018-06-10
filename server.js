@@ -78,8 +78,8 @@ router.get('/message/list', async ctx => {
 app.use(bodyParser());
 let files = {};
 app.use(staticCache(require('path').join(__dirname, 'statics'), {
-	maxAge: 365 * 24 * 60 * 60,
-	gzip: true
+	// maxAge: 365 * 24 * 60 * 60,
+	// gzip: true
 }, files));
 for (let file in files){
 	if(/\.html$/.test(file)){
